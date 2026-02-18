@@ -19,6 +19,8 @@
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+
+/* ФИКСИРОВАННЫЙ ПОДВАЛ - ЧЕРЕЗ FLEX */
 body{
   font-family:'Inter',sans-serif;
   background:var(--bg);
@@ -26,6 +28,15 @@ body{
   line-height:1.6;
   overflow-x:hidden;
   width:100%;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ОБЕРТКА ДЛЯ КОНТЕНТА */
+.main-content{
+  flex: 1;
+  width: 100%;
 }
 
 h1,h2,h3{font-family:'Poppins',sans-serif; text-align:center; word-wrap:break-word;}
@@ -36,18 +47,22 @@ a{text-decoration:none;color:inherit}
   width:90%;
   max-width:1200px;
   margin:auto;
-  padding:0 15px;
-}
+  padding:0 15px;}
 
 section{
   padding:80px 0;
   width:100%;
+  text-align: center;
 }
 
-/* HEADER */
+/* ==================== */
+/* HEADER - ФИКСИРОВАННЫЙ */
+/* ==================== */
 header{
   position:fixed;
-  top:0;  width:100%;
+  top:0;
+  left:0;
+  width:100%;
   background:var(--bg);
   padding:15px 0;
   border-bottom:1px solid var(--card);
@@ -81,8 +96,7 @@ nav{
   background:#2C2C2C;
 }
 
-.logo-wrapper img:hover{
-  border-color:#C8A2C8;
+.logo-wrapper img:hover{  border-color:#C8A2C8;
   transform:scale(1.08);
 }
 
@@ -96,7 +110,8 @@ nav{
 
 .nav-links{
   display:flex;
-  gap:20px;  align-items:center;
+  gap:20px;
+  align-items:center;
   flex-wrap:wrap;
   justify-content:center;
 }
@@ -119,7 +134,9 @@ nav{
   padding:5px;
 }
 
+/* ==================== */
 /* HERO */
+/* ==================== */
 .hero{
   padding-top:140px;
   padding-bottom:60px;
@@ -128,8 +145,7 @@ nav{
   overflow:visible;
   min-height:80vh;
   display:flex;
-  flex-direction:column;
-  justify-content:center;
+  flex-direction:column;  justify-content:center;
   align-items:center;
   margin-top:70px;
   width:100%;
@@ -145,7 +161,8 @@ nav{
   filter:blur(80px);
   opacity:0.4;
   z-index:-1;
-  animation:float 8s ease-in-out infinite;}
+  animation:float 8s ease-in-out infinite;
+}
 
 .hero::before{
   background:var(--accent);
@@ -178,7 +195,6 @@ nav{
   font-size:clamp(1rem, 2vw, 1.2rem);
   padding:0 10px;
 }
-
 /* КНОПКИ HERO */
 .hero-buttons{
   display:flex;
@@ -194,7 +210,8 @@ nav{
   justify-content:center;
   align-items:center;
   padding:12px 28px;
-  background:var(--accent);  color:#fff;
+  background:var(--accent);
+  color:#fff;
   border-radius:34px;
   transition:0.3s;
   cursor:pointer;
@@ -222,10 +239,11 @@ nav{
   background:var(--accent);
 }
 
+/* ==================== */
 /* PORTFOLIO */
+/* ==================== */
 .filters{
-  display:flex;
-  flex-wrap:wrap;
+  display:flex;  flex-wrap:wrap;
   gap:15px;
   margin-bottom:30px;
   justify-content:center;
@@ -243,7 +261,8 @@ nav{
 .filter-group button{
   background:var(--card);
   color:var(--text-secondary);
-  border:none;  padding:10px 20px;
+  border:none;
+  padding:10px 20px;
   cursor:pointer;
   border-radius:34px;
   transition:0.3s;
@@ -273,8 +292,7 @@ nav{
   overflow:hidden;
   cursor:pointer;
   transition:0.3s;
-  border:1px solid var(--glass-border);
-  width:100%;
+  border:1px solid var(--glass-border);  width:100%;
   max-width:350px;
 }
 
@@ -293,6 +311,7 @@ nav{
   padding:20px;
   text-align:center;
 }
+
 .tag{
   color:var(--accent);
   font-size:0.8rem;
@@ -310,7 +329,9 @@ nav{
 .badge.team{background:var(--accent);color:#fff}
 .badge.solo{background:#444;color:#fff}
 
+/* ==================== */
 /* TABS */
+/* ==================== */
 .tabs{
   display:flex;
   gap:20px;
@@ -320,8 +341,7 @@ nav{
   width:100%;
 }
 
-.tab-btn{
-  background:var(--card);
+.tab-btn{  background:var(--card);
   border:none;
   padding:12px 24px;
   cursor:pointer;
@@ -341,7 +361,9 @@ nav{
 
 .tab-content{
   display:none;
-  width:100%;}
+  width:100%;
+  text-align: center;
+}
 
 .tab-content.active{
   display:block;
@@ -368,8 +390,7 @@ nav{
   border-radius:34px;
   color:var(--accent);
   border:1px solid var(--glass-border);
-  transition:0.3s;
-  font-size:clamp(0.8rem, 2vw, 0.9rem);
+  transition:0.3s;  font-size:clamp(0.8rem, 2vw, 0.9rem);
 }
 
 .skills span:hover{
@@ -378,7 +399,9 @@ nav{
   transform:translateY(-2px);
 }
 
+/* ==================== */
 /* TIMELINE */
+/* ==================== */
 .timeline{
   position:relative;
   max-width:800px;
@@ -390,7 +413,8 @@ nav{
 .timeline::before{
   content:'';
   position:absolute;
-  left:50%;  transform:translateX(-50%);
+  left:50%;
+  transform:translateX(-50%);
   width:2px;
   height:100%;
   background:linear-gradient(to bottom,var(--accent),var(--accent-hover));
@@ -415,8 +439,7 @@ nav{
 
 .timeline-item::before{
   content:'';
-  position:absolute;
-  width:16px;
+  position:absolute;  width:16px;
   height:16px;
   background:var(--accent);
   border-radius:50%;
@@ -439,7 +462,8 @@ nav{
   -webkit-backdrop-filter:blur(10px);
   border:1px solid var(--glass-border);
   border-radius:34px;
-  padding:25px;  transition:0.3s;
+  padding:25px;
+  transition:0.3s;
 }
 
 .timeline-card:hover{
@@ -464,8 +488,7 @@ nav{
   color:var(--text-secondary);
   font-size:clamp(0.75rem, 1.5vw, 0.85rem);
   margin-bottom:15px;
-  display:inline-block;
-  background:var(--card);
+  display:inline-block;  background:var(--card);
   padding:4px 12px;
   border-radius:34px;
 }
@@ -476,7 +499,9 @@ nav{
   line-height:1.7;
 }
 
+/* ==================== */
 /* CONTACTS */
+/* ==================== */
 #contact h2{
   margin-bottom:34px;
   font-size:clamp(1.5rem, 4vw, 2rem);
@@ -488,7 +513,8 @@ nav{
   align-items:center;
   flex-wrap:wrap;
   gap:60px;
-  width:100%;}
+  width:100%;
+}
 
 .social-center a{
   display:flex;
@@ -511,8 +537,7 @@ nav{
   padding:10px;
 }
 
-.social-center a:hover svg{
-  fill:#C8A2C8;
+.social-center a:hover svg{  fill:#C8A2C8;
   transform:translateY(-6px) scale(1.08);
   background:var(--accent);
 }
@@ -521,15 +546,18 @@ nav{
   color:#FFFFFF;
 }
 
-/* FOOTER */
+/* ==================== */
+/* FOOTER - ФИКСИРОВАННЫЙ ВНИЗУ */
+/* ==================== */
 footer{
   background:var(--card);
   text-align:center;
   padding:34px 20px;
-  margin-top:40px;
+  margin-top:auto;
   border-radius:34px 34px 0 0;
   width:100%;
   max-width:100%;
+  flex-shrink: 0;
 }
 
 footer p{
@@ -538,6 +566,7 @@ footer p{
   margin:0;
   width:100%;
 }
+
 /* SECTION HEADINGS */
 section h2{
   margin-bottom:34px;
@@ -557,7 +586,6 @@ section h2{
   z-index:2000;
   padding:20px;
 }
-
 .modal-content{
   background:var(--card);
   padding:30px;
@@ -586,7 +614,8 @@ section h2{
 .modal-content textarea{
   width:100%;
   padding:12px 16px;
-  margin-bottom:15px;  background:var(--bg);
+  margin-bottom:15px;
+  background:var(--bg);
   border:1px solid var(--glass-border);
   border-radius:34px;
   color:#fff;
@@ -600,15 +629,21 @@ section h2{
   resize:vertical;
 }
 
-/* MEDIA QUERIES */
+/* ==================== */
+/* MEDIA QUERIES - МОБИЛЬНАЯ ВЕРСИЯ */
+/* ==================== */
 @media(max-width:1024px) {
   .container{ width:95%; }
   .hero::before, .hero::after{ width:300px; height:300px; }
-  .grid{ grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); }
-}
+  .grid{ grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); }}
 
 @media(max-width:768px) {
-  header{ padding:12px 0; }
+  header{ 
+    padding:12px 0;
+    position: fixed;
+    left: 0;
+    width: 100%;
+  }
   nav{ padding:0 4%; flex-wrap:wrap; }
   .logo-wrapper img{ width:36px; height:36px; }
   .logo-name{ font-size:1rem; }
@@ -623,6 +658,7 @@ section h2{
     padding:20px;
     border-bottom:1px solid var(--card);
     gap:15px;
+    text-align: center;
   }
   .nav-links.active{ display:flex; }
   .nav-links .btn{ width:100%; justify-content:center; }
@@ -633,20 +669,22 @@ section h2{
   .hero p{ font-size:clamp(0.9rem, 3vw, 1.1rem); }
   .hero-buttons{ flex-direction:row; justify-content:center; gap:10px; }
   .btn{ width:auto; min-width:130px; padding:10px 20px; font-size:0.85rem; }
-  section{ padding:60px 0; }
+  section{ padding:60px 0; text-align: center; }
   section h2{ font-size:clamp(1.3rem, 5vw, 1.8rem); }
-  .tabs{ gap:10px; }  .tab-btn{ padding:10px 18px; font-size:0.85rem; }
+  .tabs{ gap:10px; justify-content: center; }
+  .tab-btn{ padding:10px 18px; font-size:0.85rem; }
   .timeline::before{ left:20px; }
   .timeline-item{ width:100%; left:0!important; text-align:center!important; padding:0 0 0 50px; }
   .timeline-item::before{ left:12px!important; right:auto!important; }
   .timeline-card{ text-align:center; }
-  .social-center{ gap:40px; }
+  .social-center{ gap:40px; justify-content: center; }
   .social-center svg{ width:42px; height:42px; }
-  .grid{ grid-template-columns:1fr; gap:20px; }
+  .grid{ grid-template-columns:1fr; gap:20px; justify-items: center; }
   .card{ max-width:100%; }
   .filters{ justify-content:center; }
   .filter-group{ justify-content:center; }
   .filter-group button{ width:auto; max-width:none; }
+  .skills{ justify-content: center; }  .timeline{ text-align: center; }
 }
 
 @media(max-width:480px) {
@@ -658,14 +696,14 @@ section h2{
   .hero::before, .hero::after{ width:200px; height:200px; }
   .hero h1{ font-size:clamp(1.5rem, 7vw, 2rem); }
   .hero p{ font-size:clamp(0.85rem, 4vw, 1rem); }
-  .hero-buttons{ gap:8px; }
+  .hero-buttons{ gap:8px; justify-content: center; }
   .btn{ padding:10px 18px; font-size:0.8rem; min-width:120px; }
-  section{ padding:40px 0; }
+  section{ padding:40px 0; text-align: center; }
   section h2{ font-size:clamp(1.2rem, 6vw, 1.6rem); }
   .skills span{ padding:8px 16px; font-size:0.8rem; }
   .timeline-item{ padding:0 0 0 40px; }
   .timeline-card{ padding:20px; }
-  .social-center{ gap:30px; }
+  .social-center{ gap:30px; justify-content: center; }
   .social-center svg{ width:38px; height:38px; }
   .modal-content{ padding:20px; width:95%; }
   footer{ padding:25px 15px; }
@@ -676,15 +714,16 @@ section h2{
 @media(max-width:360px) {
   .logo-name{ display:none; }
   .hero h1{ font-size:1.4rem; }
-  .hero-buttons{ gap:6px; }
+  .hero-buttons{ gap:6px; justify-content: center; }
   .btn{ min-width:110px; padding:8px 14px; font-size:0.75rem; }
-  .social-center{ gap:25px; }
+  .social-center{ gap:25px; justify-content: center; }
   .social-center a{ font-size:0.75rem; }
   .social-center svg{ width:35px; height:35px; }
   .filter-group button{ padding:6px 12px; font-size:0.7rem; }
 }
 
-@media(min-width:1400px) {  .container{ max-width:1400px; }
+@media(min-width:1400px) {
+  .container{ max-width:1400px; }
   .hero::before, .hero::after{ width:500px; height:500px; }
   .grid{ grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); }
 }
@@ -694,8 +733,7 @@ section h2{
 
 <header>
 <nav>
-  <div class="logo-wrapper">
-    <img src="https://picsum.photos/100" alt="Profile">
+  <div class="logo-wrapper">    <img src="https://picsum.photos/100" alt="Profile">
     <span class="logo-name">Anastasia Gutman</span>
   </div>
   <div class="nav-links" id="navLinks">
@@ -709,6 +747,7 @@ section h2{
 </nav>
 </header>
 
+<div class="main-content">
 <section id="home" class="hero container">
   <h1>Designing Experiences That Matter</h1>
   <p>Minimal. Functional. Strategic.</p>
@@ -733,7 +772,8 @@ section h2{
     <button class="tab-btn active" onclick="switchTab('skills', this)">Мои навыки</button>
     <button class="tab-btn" onclick="switchTab('experience', this)">Опыт работы</button>
   </div>
-  <div id="skills" class="tab-content active">    <p style="color:var(--text-secondary);margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto;">
+  <div id="skills" class="tab-content active">
+    <p style="color:var(--text-secondary);margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto;">
       Я создаю цифровые продукты, которые сочетают в себе эстетику и функциональность.
     </p>
     <div class="skills">
@@ -742,8 +782,7 @@ section h2{
       <span>Photoshop</span>
       <span>Illustrator</span>
       <span>Webflow</span>
-      <span>HTML/CSS</span>
-      <span>UI/UX</span>
+      <span>HTML/CSS</span>      <span>UI/UX</span>
       <span>Брендинг</span>
     </div>
   </div>
@@ -782,7 +821,8 @@ section h2{
 
 <section id="contact" class="container">
   <h2>Связаться со мной</h2>
-  <div class="social-center">    <a href="https://dribbble.com/AnastasiaGutman" target="_blank">
+  <div class="social-center">
+    <a href="https://dribbble.com/AnastasiaGutman" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z"/></svg>
       <span>Dribbble</span>
     </a>
@@ -791,8 +831,7 @@ section h2{
       <span>Behance</span>
     </a>
     <a href="https://vk.com/gutmanichkanastishka2010" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3V5z"/></svg>
-      <span>VK</span>
+      <svg viewBox="0 0 24 24"><path d="M3 5h18v14H3V5z"/></svg>      <span>VK</span>
     </a>
     <a href="https://t.me/Anastnngut" target="_blank">
       <svg viewBox="0 0 24 24"><path d="M9.04 15.47l-.39 4.06c.56 0 .8-.24 1.09-.53l2.61-2.5"/></svg>
@@ -804,6 +843,7 @@ section h2{
     </a>
   </div>
 </section>
+</div>
 
 <footer>
   <p>© 2026 Анастасия Гутман</p>
@@ -831,25 +871,21 @@ let state = JSON.parse(localStorage.getItem("portfolioData")) || {
 function saveState() {
   localStorage.setItem("portfolioData", JSON.stringify(state));
 }
+
 // MENU
 function toggleMenu() {
   const nav = document.getElementById("navLinks");
   if (nav) nav.classList.toggle("active");
 }
 
-// TABS - ИСПРАВЛЕНО
+// TABS
 function switchTab(tabName, btnElement) {
-  // Убираем active у всех кнопок
-  document.querySelectorAll(".tab-btn").forEach(function(b) {
-    b.classList.remove("active");
+  document.querySelectorAll(".tab-btn").forEach(function(b) {    b.classList.remove("active");
   });
-  // Убираем active у всего контента
   document.querySelectorAll(".tab-content").forEach(function(c) {
     c.classList.remove("active");
   });
-  // Добавляем active нажатой кнопке
   if (btnElement) btnElement.classList.add("active");
-  // Показываем нужный контент
   const tabContent = document.getElementById(tabName);
   if (tabContent) tabContent.classList.add("active");
 }
@@ -880,7 +916,8 @@ function renderFilters() {
   });
 
   types.forEach(function(type) {
-    const btn = document.createElement("button");    btn.textContent = type;
+    const btn = document.createElement("button");
+    btn.textContent = type;
     if (type === activeType) btn.classList.add("active");
     btn.onclick = function() { 
       activeType = type; 
@@ -892,8 +929,7 @@ function renderFilters() {
 
 function render() {
   const grid = document.getElementById("portfolioGrid");
-  if (!grid) return;
-  
+  if (!grid) return;  
   grid.innerHTML = "";
   renderFilters();
 
@@ -929,7 +965,8 @@ function openLanding(project) {
       '<img src="' + project.img[0] + '" alt="">' +
       '<p>' + project.desc + '</p>' +
       '<p><strong>Tools:</strong> ' + project.tools.join(", ") + '</p>' +
-      '<p style="color:#B19CD9;margin-top:15px;">⚠️ Лендинг ещё не загружен</p>' +      '<button onclick="closeModal()" class="btn" style="margin-top:15px;">Закрыть</button>';
+      '<p style="color:#B19CD9;margin-top:15px;">⚠️ Лендинг ещё не загружен</p>' +
+      '<button onclick="closeModal()" class="btn" style="margin-top:15px;">Закрыть</button>';
     modal.style.display = "flex";
   }
 }
@@ -941,8 +978,7 @@ function closeModal() {
 
 // ADMIN
 function openAdminAuth() {
-  const login = prompt("Login:");
-  const pass = prompt("Password:");
+  const login = prompt("Login:");  const pass = prompt("Password:");
   if (login === ADMIN_LOGIN && pass === ADMIN_PASS) {
     openAdmin();
   } else {
@@ -978,6 +1014,7 @@ function openAdmin() {
     '<button class="btn" onclick="closeModal()">Close</button>';
   modal.style.display = "flex";
 }
+
 function saveProfile() {
   state.profile.name = document.getElementById("adminName").value;
   saveState();
@@ -990,8 +1027,7 @@ function addProject() {
     title: document.getElementById("pTitle").value,
     category: document.getElementById("pCategory").value,
     type: document.getElementById("pType").value,
-    img: [document.getElementById("pImg").value],
-    url: document.getElementById("pUrl").value,
+    img: [document.getElementById("pImg").value],    url: document.getElementById("pUrl").value,
     desc: document.getElementById("pDesc").value,
     tools: document.getElementById("pTools").value.split(",")
   };
@@ -1009,7 +1045,7 @@ function deleteProject() {
   alert("Deleted");
 }
 
-// INIT - ИСПРАВЛЕНО
+// INIT
 document.addEventListener("DOMContentLoaded", function() {
   console.log("DOM loaded");
   render();
