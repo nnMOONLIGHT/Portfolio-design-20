@@ -30,25 +30,27 @@ body{
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  text-align: center;
 }
 
 .main-content{
   flex: 1;
   width: 100%;
-  text-align: center;
 }
 
 h1,h2,h3{
   font-family:'Poppins',sans-serif; 
-  text-align:center; 
+  text-align:center !important; 
   word-wrap:break-word;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 p{
-  text-align:center;   word-wrap:break-word;
+  text-align:center !important;   word-wrap:break-word;
   width: 100%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 a{text-decoration:none;color:inherit}
@@ -74,7 +76,7 @@ header{
   top:0;
   left:0;
   width:100%;
-  background:rgba(26, 26, 26, 0.95);
+  background:rgba(26, 26, 26, 0.98);
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   padding:15px 0;
@@ -94,9 +96,9 @@ nav{
 }
 
 .logo-wrapper{
-  display:flex;
-  align-items:center;
-  gap:12px;  flex-shrink:0;
+  display:flex;  align-items:center;
+  gap:12px;
+  flex-shrink:0;
   cursor: pointer;
   transition: 0.3s ease;
 }
@@ -144,8 +146,8 @@ nav{
   position: relative;
   padding: 5px 0;
 }
-
-.nav-links a::after{  content: '';
+.nav-links a::after{
+  content: '';
   position: absolute;
   bottom: 0;
   left: 0;
@@ -193,14 +195,16 @@ nav{
   background: var(--accent);
   color: #fff;
 }
-
-.hamburger{  display:none;
+.hamburger{
+  display:none;
   cursor:pointer;
   font-size:1.5rem;
   color:var(--text);
   padding:5px;
   transition: 0.3s;
   z-index: 1001;
+  background: none;
+  border: none;
 }
 
 .hamburger:hover{
@@ -239,10 +243,10 @@ nav{
 }
 
 .hero::before{
-  background:var(--accent);
-  top:-100px;
+  background:var(--accent);  top:-100px;
   left:-100px;
 }
+
 .hero::after{
   background:var(--accent-hover);
   bottom:-100px;
@@ -288,11 +292,11 @@ nav{
   align-items:center;
   padding:12px 28px;
   background:var(--accent);
-  color:#fff;
-  border-radius:34px;
+  color:#fff;  border-radius:34px;
   transition:0.3s;
   cursor:pointer;
-  border:none;  text-decoration:none;
+  border:none;
+  text-decoration:none;
   font-family:'Inter',sans-serif;
   font-size:clamp(0.85rem, 2vw, 0.95rem);
   margin:0;
@@ -337,11 +341,11 @@ nav{
   width:auto;
 }
 
-.filter-group button{
-  background:var(--card);
+.filter-group button{  background:var(--card);
   color:var(--text-secondary);
   border:none;
-  padding:10px 20px;  cursor:pointer;
+  padding:10px 20px;
+  cursor:pointer;
   border-radius:34px;
   transition:0.3s;
   font-family:'Inter',sans-serif;
@@ -386,11 +390,11 @@ nav{
   width:100%;
   display:block;
   object-fit:cover;
-  transition: 0.3s;
-}
+  transition: 0.3s;}
 
 .card:hover img{
-  transform: scale(1.05);}
+  transform: scale(1.05);
+}
 
 .card-content{
   padding:20px;
@@ -435,10 +439,10 @@ nav{
   border-radius:34px;
   transition:0.3s;
   font-family:'Inter',sans-serif;
-  font-size:clamp(0.85rem, 2vw, 0.95rem);
-  white-space:nowrap;
+  font-size:clamp(0.85rem, 2vw, 0.95rem);  white-space:nowrap;
   width:auto;
 }
+
 .tab-btn.active{
   background:var(--accent);
   color:#fff;
@@ -484,11 +488,11 @@ nav{
   font-size:clamp(0.8rem, 2vw, 0.9rem);
 }
 
-.skills span:hover{
-  background:var(--accent);
+.skills span:hover{  background:var(--accent);
   color:#fff;
   transform:translateY(-2px);
-  box-shadow: 0 5px 20px rgba(177, 156, 217, 0.3);}
+  box-shadow: 0 5px 20px rgba(177, 156, 217, 0.3);
+}
 
 /* ==================== */
 /* TIMELINE */
@@ -533,11 +537,11 @@ nav{
   content:'';
   position:absolute;
   width:16px;
-  height:16px;
-  background:var(--accent);
+  height:16px;  background:var(--accent);
   border-radius:50%;
   top:20px;
-  z-index:2;  box-shadow:0 0 20px var(--accent);
+  z-index:2;
+  box-shadow:0 0 20px var(--accent);
   transition: 0.3s;
 }
 
@@ -582,11 +586,11 @@ nav{
   font-size:clamp(0.8rem, 2vw, 0.9rem);
   margin-bottom:10px;
 }
-
 .timeline-card .year{
   color:var(--text-secondary);
   font-size:clamp(0.75rem, 1.5vw, 0.85rem);
-  margin-bottom:15px;  display:inline-block;
+  margin-bottom:15px;
+  display:inline-block;
   background:var(--card);
   padding:4px 12px;
   border-radius:34px;
@@ -631,10 +635,10 @@ nav{
   height:48px;
   fill:#B19CD9;
   transition:0.3s ease;
-  background:var(--card);
-  border-radius:34px;
+  background:var(--card);  border-radius:34px;
   padding:10px;
 }
+
 .social-center a:hover svg{
   fill:#C8A2C8;
   transform:translateY(-6px) scale(1.08);
@@ -647,11 +651,11 @@ nav{
 }
 
 /* ==================== */
-/* FOOTER */
+/* FOOTER - FULLY ADAPTIVE */
 /* ==================== */
 footer{
   background:var(--card);
-  text-align:center;
+  text-align:center !important;
   padding:34px 20px;
   margin-top:auto;
   border-radius:34px 34px 0 0;
@@ -665,6 +669,7 @@ footer p{
   color:var(--text-secondary);
   margin:0;
   width:100%;
+  text-align:center !important;
 }
 
 section h2{
@@ -679,12 +684,12 @@ section h2{
 section h2::after{
   content: '';
   display: block;
-  width: 60px;
-  height: 3px;
+  width: 60px;  height: 3px;
   background: var(--accent);
   margin: 10px auto 0;
   border-radius: 34px;
 }
+
 /* ==================== */
 /* MODAL */
 /* ==================== */
@@ -728,12 +733,12 @@ section h2::after{
   width:100%;
   padding:12px 16px;
   margin-bottom:15px;
-  background:var(--bg);
-  border:1px solid var(--glass-border);
+  background:var(--bg);  border:1px solid var(--glass-border);
   border-radius:34px;
   color:#fff;
   font-family:'Inter',sans-serif;
-  font-size:clamp(0.85rem, 2vw, 1rem);}
+  font-size:clamp(0.85rem, 2vw, 1rem);
+}
 
 .modal-content textarea{
   border-radius:20px;
@@ -777,13 +782,13 @@ section h2::after{
     position:absolute;
     top:100%;
     left:0;
-    width:100%;
-    background:var(--bg);
+    width:100%;    background:var(--bg);
     padding:25px 20px;
     border-bottom:1px solid var(--card);
     gap:15px;
-    text-align: center;  }
-  .nav-links.active{ display:flex; }
+    text-align: center;
+  }
+  .nav-links.active{ display:flex !important; }
   .nav-links .btn{ width:100%; justify-content:center; }
   
   .lang-switcher{
@@ -792,7 +797,10 @@ section h2::after{
     display: flex !important;
   }
   
-  .hamburger{ display:block; }
+  .hamburger{ 
+    display:block !important; 
+    cursor: pointer;
+  }
   
   .hero{ 
     margin-top:60px; 
@@ -823,15 +831,15 @@ section h2::after{
     text-align:center!important; 
     padding:0 0 0 55px; 
   }
-  .timeline-item::before{ left:12px!important; right:auto!important; }
-  .timeline-card{ text-align:center; }
+  .timeline-item::before{ left:12px!important; right:auto!important; }  .timeline-card{ text-align:center; }
   
   .social-center{ gap:45px; justify-content: center; }
   .social-center svg{ width:48px; height:48px; }
   
   .grid{ grid-template-columns:1fr; gap:20px; justify-items: center; }
   .card{ max-width:100%; }
-    .filters{ justify-content:center; }
+  
+  .filters{ justify-content:center; }
   .filter-group{ justify-content:center; }
   .filter-group button{ width:auto; max-width:none; }
   .skills{ justify-content: center; }
@@ -872,15 +880,17 @@ section h2::after{
   .logo-name{ display:none; }
   .logo-wrapper{ gap: 0; }
   .hero h1{ font-size:1.4rem; }
-  .hero-buttons{ gap:8px; justify-content: center; }
-  .btn{ min-width:120px; padding:8px 16px; font-size:0.8rem; }
+  .hero-buttons{ gap:8px; justify-content: center; }  .btn{ min-width:120px; padding:8px 16px; font-size:0.8rem; }
   .social-center{ gap:28px; justify-content: center; }
   .social-center a{ font-size:0.75rem; }
   .social-center svg{ width:40px; height:40px; }
   .filter-group button{ padding:6px 12px; font-size:0.75rem; }
+  footer{ padding:20px 10px; }
+  footer p{ font-size:0.75rem; }
 }
 
-@media(min-width:1400px) {  .container{ max-width:1400px; }
+@media(min-width:1400px) {
+  .container{ max-width:1400px; }
   .hero::before, .hero::after{ width:600px; height:600px; }
   .grid{ grid-template-columns:repeat(3, 1fr); }
   .social-center{ gap: 100px; }
@@ -908,7 +918,7 @@ section h2::after{
     <a href="#contact" data-translate="nav_contact">Контакты</a>
     <button class="btn" onclick="openAdminAuth()" data-translate="btn_admin">Admin</button>
   </div>
-  <div class="hamburger" onclick="toggleMenu()">☰</div>
+  <button class="hamburger" id="hamburgerBtn" onclick="toggleMenu()">☰</button>
 </nav>
 </header>
 
@@ -919,8 +929,7 @@ section h2::after{
   <div class="hero-buttons">
     <a href="#portfolio" class="btn" data-translate="btn_view_works">Смотреть работы</a>
     <a href="#contact" class="btn secondary" data-translate="btn_contact">Связаться</a>
-  </div>
-</section>
+  </div></section>
 
 <section id="portfolio" class="container">
   <h2 data-translate="section_portfolio">Портфолио</h2>
@@ -930,11 +939,12 @@ section h2::after{
   </div>
   <div class="grid" id="portfolioGrid"></div>
 </section>
+
 <section id="about" class="container">
   <h2 data-translate="section_about">Обо мне</h2>
   <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('skills')" data-translate="tab_skills">Мои навыки</button>
-    <button class="tab-btn" onclick="switchTab('experience')" data-translate="tab_experience">Опыт работы</button>
+    <button class="tab-btn active" id="tabBtnSkills" onclick="switchTab('skills')" data-translate="tab_skills">Мои навыки</button>
+    <button class="tab-btn" id="tabBtnExperience" onclick="switchTab('experience')" data-translate="tab_experience">Опыт работы</button>
   </div>
   <div id="skills" class="tab-content active">
     <p style="color:var(--text-secondary);margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto;" data-translate="about_text">
@@ -968,8 +978,7 @@ section h2::after{
         <div class="timeline-card">
           <h3>Middle UI Designer</h3>
           <p class="company">Tech Startup SPb</p>
-          <span class="year">2022 — 2024</span>
-          <p data-translate="exp2_desc">Проектирование мобильных приложений.</p>
+          <span class="year">2022 — 2024</span>          <p data-translate="exp2_desc">Проектирование мобильных приложений.</p>
         </div>
       </div>
       <div class="timeline-item">
@@ -978,7 +987,8 @@ section h2::after{
           <p class="company">Creative Agency</p>
           <span class="year">2021 — 2022</span>
           <p data-translate="exp3_desc">Создание визуального контента.</p>
-        </div>      </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -1017,7 +1027,6 @@ section h2::after{
 <div class="modal" id="modal">
   <div class="modal-content" id="modalContent"></div>
 </div>
-
 <script>
 // =====================
 // TRANSLATIONS
@@ -1027,7 +1036,8 @@ const translations = {
     nav_home: "Главная",
     nav_portfolio: "Портфолио",
     nav_about: "Обо мне",
-    nav_contact: "Контакты",    btn_admin: "Admin",
+    nav_contact: "Контакты",
+    btn_admin: "Admin",
     hero_title: "Designing Experiences That Matter",
     hero_subtitle: "Minimal. Functional. Strategic.",
     btn_view_works: "Смотреть работы",
@@ -1066,8 +1076,7 @@ const translations = {
     deleted: "Deleted",
     saved: "Saved",
     wrong_credentials: "Wrong credentials"
-  },
-  en: {
+  },  en: {
     nav_home: "Home",
     nav_portfolio: "Portfolio",
     nav_about: "About",
@@ -1076,7 +1085,8 @@ const translations = {
     hero_title: "Designing Experiences That Matter",
     hero_subtitle: "Minimal. Functional. Strategic.",
     btn_view_works: "View Works",
-    btn_contact: "Contact Me",    section_portfolio: "Portfolio",
+    btn_contact: "Contact Me",
+    section_portfolio: "Portfolio",
     section_about: "About Me",
     section_contact: "Contact Me",
     tab_skills: "My Skills",
@@ -1115,8 +1125,7 @@ const translations = {
 
 let currentLang = localStorage.getItem('portfolioLang') || 'ru';
 
-// =====================
-// SCROLL TO CONTACT
+// =====================// SCROLL TO CONTACT
 // =====================
 function scrollToContact() {
   const contactSection = document.getElementById('contact');
@@ -1126,6 +1135,7 @@ function scrollToContact() {
   const navLinks = document.getElementById('navLinks');
   if(navLinks) navLinks.classList.remove('active');
 }
+
 // =====================
 // LANGUAGE SWITCHER
 // =====================
@@ -1164,8 +1174,7 @@ let state = JSON.parse(localStorage.getItem("portfolioData")) || {
     { id: 1, title: "Website Redesign", category: "Веб-платформы", type: "Одиночные", img: ["https://picsum.photos/600/400?1"], desc: "Modern website redesign.", tools: ["Figma", "Webflow"], url: "" },
     { id: 2, title: "Mobile App", category: "Приложения", type: "Командные", img: ["https://picsum.photos/600/400?2"], desc: "Fitness tracking app.", tools: ["Figma"], url: "" },
     { id: 3, title: "Brand Identity", category: "Логотипы", type: "Одиночные", img: ["https://picsum.photos/600/400?3"], desc: "Brand package.", tools: ["Illustrator"], url: "" }
-  ]
-};
+  ]};
 
 function saveState() {
   localStorage.setItem("portfolioData", JSON.stringify(state));
@@ -1174,10 +1183,14 @@ function saveState() {
 // =====================
 // MENU - FIXED
 // =====================
-function toggleMenu() {  const nav = document.getElementById("navLinks");
+function toggleMenu() {
+  const nav = document.getElementById("navLinks");
   if (nav) {
-    nav.classList.toggle("active");
-    console.log("Menu toggled, active:", nav.classList.contains("active"));
+    if (nav.classList.contains("active")) {
+      nav.classList.remove("active");
+    } else {
+      nav.classList.add("active");
+    }
   }
 }
 
@@ -1185,8 +1198,6 @@ function toggleMenu() {  const nav = document.getElementById("navLinks");
 // TABS - FIXED
 // =====================
 function switchTab(tabName) {
-  console.log("Switching to tab:", tabName);
-  
   // Remove active from all buttons
   const allButtons = document.querySelectorAll(".tab-btn");
   allButtons.forEach(function(b) {
@@ -1199,22 +1210,19 @@ function switchTab(tabName) {
     c.classList.remove("active");
   });
   
-  // Find clicked button and make active
-  const buttons = document.querySelectorAll(".tab-btn");
-  buttons.forEach(function(btn) {
-    if(btn.getAttribute("onclick").includes(tabName)) {
-      btn.classList.add("active");
-    }
-  });
+  // Add active to clicked button
+  if (tabName === 'skills') {
+    document.getElementById('tabBtnSkills').classList.add('active');
+  } else if (tabName === 'experience') {
+    document.getElementById('tabBtnExperience').classList.add('active');
+  }
   
   // Show target content
   const tabContent = document.getElementById(tabName);
   if (tabContent) {
     tabContent.classList.add("active");
-    console.log("Tab content shown:", tabName);
   }
 }
-
 // =====================
 // PORTFOLIO
 // =====================
@@ -1223,7 +1231,8 @@ const categories = {
   en: ["All", "Websites", "Apps", "Cases", "Design", "Logos"]
 };
 
-const types = {  ru: ["Все", "Командные", "Одиночные"],
+const types = {
+  ru: ["Все", "Командные", "Одиночные"],
   en: ["All", "Team", "Solo"]
 };
 
@@ -1263,16 +1272,13 @@ function renderFilters() {
 
 function render() {
   const grid = document.getElementById("portfolioGrid");
-  if (!grid) {
-    console.log("Grid not found!");
-    return;
-  }
-  
+  if (!grid) return;  
   grid.innerHTML = "";
   renderFilters();
 
   let filtered = state.projects.filter(function(p) {
-    return (activeCategory === categories[currentLang][0] || p.category === activeCategory) &&           (activeType === types[currentLang][0] || p.type === activeType);
+    return (activeCategory === categories[currentLang][0] || p.category === activeCategory) &&
+           (activeType === types[currentLang][0] || p.type === activeType);
   });
 
   filtered.forEach(function(p) {
@@ -1315,16 +1321,15 @@ function openLanding(project) {
 }
 
 function closeModal() {
-  const modal = document.getElementById("modal");
-  if (modal) modal.style.display = "none";
+  const modal = document.getElementById("modal");  if (modal) modal.style.display = "none";
 }
 
 // =====================
 // ADMIN - FIXED
-// =====================function openAdminAuth() {
+// =====================
+function openAdminAuth() {
   const login = prompt("Login:");
   const pass = prompt("Password:");
-  console.log("Admin auth attempt:", login, pass === ADMIN_PASS ? "correct" : "wrong");
   
   if (login === ADMIN_LOGIN && pass === ADMIN_PASS) {
     openAdmin();
@@ -1338,10 +1343,7 @@ function closeModal() {
 function openAdmin() {
   const modal = document.getElementById("modal");
   const content = document.getElementById("modalContent");
-  if (!modal || !content) {
-    console.log("Modal not found!");
-    return;
-  }
+  if (!modal || !content) return;
 
   const t = translations[currentLang];
   
@@ -1365,12 +1367,11 @@ function openAdmin() {
     '<br><br>' +
     '<button class="btn" onclick="closeModal()">' + t.btn_close + '</button>';
   modal.style.display = "flex";
-  console.log("Admin panel opened");
 }
 
 function saveProfile() {
-  state.profile.name = document.getElementById("adminName").value;
-  saveState();  alert(translations[currentLang].saved);
+  state.profile.name = document.getElementById("adminName").value;  saveState();
+  alert(translations[currentLang].saved);
 }
 
 function addProject() {
@@ -1402,12 +1403,8 @@ function deleteProject() {
 // INIT - FIXED
 // =====================
 document.addEventListener("DOMContentLoaded", function() {
-  console.log("=== DOM LOADED ===");
   setLanguage(currentLang);
   render();
-  console.log("=== INIT COMPLETE ===");
-  console.log("Current language:", currentLang);
-  console.log("Projects loaded:", state.projects.length);
 });
 </script>
 
