@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -54,16 +53,21 @@ section{
   text-align: center;
 }
 
-/* HEADER */
+/* ==================== */
+/* HEADER - OPTIMIZED */
+/* ==================== */
 header{
   position:fixed;
   top:0;
   left:0;
   width:100%;
-  background:var(--bg);
+  background:rgba(26, 26, 26, 0.95);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
   padding:15px 0;
   border-bottom:1px solid var(--card);
   z-index:1000;
+  transition: 0.3s ease;
 }
 
 nav{
@@ -76,27 +80,35 @@ nav{
   width:100%;
 }
 
+/* AVATAR - CLICKABLE */
 .logo-wrapper{
   display:flex;
   align-items:center;
   gap:12px;
   flex-shrink:0;
+  cursor: pointer;
+  transition: 0.3s ease;
+}
+
+.logo-wrapper:hover{
+  transform: scale(1.05);
 }
 
 .logo-wrapper img{
   width:42px;
-  height:42px;
-  border-radius:34px;
+  height:42px;  border-radius:34px;
   object-fit:cover;
   border:2px solid #B19CD9;
   transition:0.3s ease;
   background:#2C2C2C;
+  box-shadow: 0 4px 15px rgba(177, 156, 217, 0.3);
 }
 
-.logo-wrapper img:hover{
+.logo-wrapper:hover img{
   border-color:#C8A2C8;
-  transform:scale(1.08);
+  box-shadow: 0 6px 20px rgba(177, 156, 217, 0.5);
 }
+
 .logo-name{
   font-family:'Poppins',sans-serif;
   font-weight:600;
@@ -117,13 +129,29 @@ nav{
   color:var(--text);
   transition:0.3s;
   white-space:nowrap;
+  position: relative;
+  padding: 5px 0;
 }
+
+.nav-links a::after{
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: 0.3s;
+}
+
+.nav-links a:hover::after{
+  width: 100%;}
 
 .nav-links a:hover{
   color:var(--accent);
 }
 
-/* LANGUAGE SWITCHER - ALWAYS VISIBLE */
+/* LANGUAGE SWITCHER */
 .lang-switcher{
   display: flex;
   gap: 5px;
@@ -146,7 +174,8 @@ nav{
 
 .lang-btn.active{
   background: var(--accent);
-  color: #fff;  border-color: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
 }
 
 .lang-btn:hover{
@@ -160,9 +189,15 @@ nav{
   font-size:1.5rem;
   color:var(--text);
   padding:5px;
+  transition: 0.3s;
 }
 
-/* HERO */
+.hamburger:hover{
+  color: var(--accent);
+}
+/* ==================== */
+/* HERO - OPTIMIZED */
+/* ==================== */
 .hero{
   padding-top:140px;
   padding-bottom:60px;
@@ -196,6 +231,7 @@ nav{
   top:-100px;
   left:-100px;
 }
+
 .hero::after{
   background:var(--accent-hover);
   bottom:-100px;
@@ -207,12 +243,12 @@ nav{
   0%,100%{transform:translate(0,0) scale(1)}
   50%{transform:translate(30px,40px) scale(1.1)}
 }
-
 .hero h1{
   font-size:clamp(2rem, 5vw, 3.5rem);
   margin-bottom:20px;
   line-height:1.2;
   padding:0 10px;
+  font-weight: 700;
 }
 
 .hero p{
@@ -220,6 +256,9 @@ nav{
   margin-bottom:30px;
   font-size:clamp(1rem, 2vw, 1.2rem);
   padding:0 10px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* BUTTONS */
@@ -244,16 +283,18 @@ nav{
   cursor:pointer;
   border:none;
   text-decoration:none;
-  font-family:'Inter',sans-serif;  font-size:clamp(0.85rem, 2vw, 0.95rem);
+  font-family:'Inter',sans-serif;
+  font-size:clamp(0.85rem, 2vw, 0.95rem);
   margin:0;
   white-space:nowrap;
   width:auto;
   min-width:140px;
+  font-weight: 500;
 }
 
-.btn:hover{
-  background:var(--accent-hover);
+.btn:hover{  background:var(--accent-hover);
   transform:translateY(-2px);
+  box-shadow: 0 10px 30px rgba(177, 156, 217, 0.4);
 }
 
 .btn.secondary{
@@ -265,7 +306,9 @@ nav{
   background:var(--accent);
 }
 
-/* PORTFOLIO */
+/* ==================== */
+/* PORTFOLIO - OPTIMIZED */
+/* ==================== */
 .filters{
   display:flex;
   flex-wrap:wrap;
@@ -293,13 +336,14 @@ nav{
   transition:0.3s;
   font-family:'Inter',sans-serif;
   font-size:clamp(0.8rem, 2vw, 0.9rem);
-  white-space:nowrap;  width:auto;
+  white-space:nowrap;
+  width:auto;
 }
 
 .filter-group button.active,
-.filter-group button:hover{
-  background:var(--accent);
+.filter-group button:hover{  background:var(--accent);
   color:#fff;
+  transform: translateY(-2px);
 }
 
 .grid{
@@ -324,12 +368,18 @@ nav{
 .card:hover{
   transform:translateY(-6px);
   box-shadow:0 10px 40px rgba(177,156,217,0.2);
+  border-color: var(--accent);
 }
 
 .card img{
   width:100%;
   display:block;
   object-fit:cover;
+  transition: 0.3s;
+}
+
+.card:hover img{
+  transform: scale(1.05);
 }
 
 .card-content{
@@ -340,9 +390,9 @@ nav{
 .tag{
   color:var(--accent);
   font-size:0.8rem;
-  display:inline-block;
-  margin-bottom:8px;
+  display:inline-block;  margin-bottom:8px;
 }
+
 .badge{
   font-size:0.7rem;
   padding:4px 10px;
@@ -353,7 +403,9 @@ nav{
 .badge.team{background:var(--accent);color:#fff}
 .badge.solo{background:#444;color:#fff}
 
-/* TABS */
+/* ==================== */
+/* TABS - OPTIMIZED */
+/* ==================== */
 .tabs{
   display:flex;
   gap:20px;
@@ -380,10 +432,14 @@ nav{
 .tab-btn.active{
   background:var(--accent);
   color:#fff;
+  transform: translateY(-2px);
 }
 
-.tab-content{
-  display:none;
+.tab-btn:hover{
+  transform: translateY(-2px);
+}
+
+.tab-content{  display:none;
   width:100%;
   text-align: center;
 }
@@ -392,6 +448,7 @@ nav{
   display:block;
   animation:fadeIn 0.5s ease;
 }
+
 @keyframes fadeIn{
   from{opacity:0;transform:translateY(10px)}
   to{opacity:1;transform:translateY(0)}
@@ -420,16 +477,18 @@ nav{
   background:var(--accent);
   color:#fff;
   transform:translateY(-2px);
+  box-shadow: 0 5px 20px rgba(177, 156, 217, 0.3);
 }
 
-/* TIMELINE */
+/* ==================== */
+/* TIMELINE - OPTIMIZED */
+/* ==================== */
 .timeline{
   position:relative;
   max-width:800px;
   margin:0 auto;
   padding:20px 0;
-  width:100%;
-}
+  width:100%;}
 
 .timeline::before{
   content:'';
@@ -439,7 +498,9 @@ nav{
   width:2px;
   height:100%;
   background:linear-gradient(to bottom,var(--accent),var(--accent-hover));
+  border-radius: 34px;
 }
+
 .timeline-item{
   position:relative;
   margin-bottom:40px;
@@ -467,11 +528,16 @@ nav{
   top:20px;
   z-index:2;
   box-shadow:0 0 20px var(--accent);
+  transition: 0.3s;
+}
+
+.timeline-item:hover::before{
+  box-shadow: 0 0 30px var(--accent);
+  transform: scale(1.2);
 }
 
 .timeline-item:nth-child(odd)::before{
-  right:-8px;
-}
+  right:-8px;}
 
 .timeline-item:nth-child(even)::before{
   left:-8px;
@@ -489,7 +555,9 @@ nav{
 
 .timeline-card:hover{
   background:rgba(255,255,255,0.08);
-  transform:translateY(-5px);  box-shadow:0 10px 40px rgba(177,156,217,0.15);
+  transform:translateY(-5px);
+  box-shadow:0 10px 40px rgba(177,156,217,0.15);
+  border-color: var(--accent);
 }
 
 .timeline-card h3{
@@ -519,8 +587,9 @@ nav{
   font-size:clamp(0.8rem, 1.5vw, 0.9rem);
   line-height:1.7;
 }
-
-/* CONTACTS */
+/* ==================== */
+/* CONTACTS - OPTIMIZED */
+/* ==================== */
 #contact h2{
   margin-bottom:34px;
   font-size:clamp(1.5rem, 4vw, 2rem);
@@ -538,7 +607,8 @@ nav{
 .social-center a{
   display:flex;
   flex-direction:column;
-  align-items:center;  gap:14px;
+  align-items:center;
+  gap:14px;
   color:#E0E0E0;
   transition:0.3s ease;
   font-family:'Inter',sans-serif;
@@ -559,13 +629,15 @@ nav{
   fill:#C8A2C8;
   transform:translateY(-6px) scale(1.08);
   background:var(--accent);
+  box-shadow: 0 10px 30px rgba(177, 156, 217, 0.4);
 }
 
 .social-center a:hover{
   color:#FFFFFF;
 }
-
-/* FOOTER */
+/* ==================== */
+/* FOOTER - OPTIMIZED */
+/* ==================== */
 footer{
   background:var(--card);
   text-align:center;
@@ -587,8 +659,21 @@ footer p{
 /* SECTION HEADINGS */
 section h2{
   margin-bottom:34px;
-  font-size:clamp(1.5rem, 4vw, 2rem);  padding:0 10px;
+  font-size:clamp(1.5rem, 4vw, 2rem);
+  padding:0 10px;
   width:100%;
+  position: relative;
+  display: inline-block;
+}
+
+section h2::after{
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent);
+  margin: 10px auto 0;
+  border-radius: 34px;
 }
 
 /* MODAL */
@@ -599,8 +684,7 @@ section h2{
   display:none;
   justify-content:center;
   align-items:center;
-  z-index:2000;
-  padding:20px;
+  z-index:2000;  padding:20px;
 }
 
 .modal-content{
@@ -636,7 +720,8 @@ section h2{
   border:1px solid var(--glass-border);
   border-radius:34px;
   color:#fff;
-  font-family:'Inter',sans-serif;  font-size:clamp(0.85rem, 2vw, 1rem);
+  font-family:'Inter',sans-serif;
+  font-size:clamp(0.85rem, 2vw, 1rem);
 }
 
 .modal-content textarea{
@@ -645,18 +730,59 @@ section h2{
   resize:vertical;
 }
 
-/* MEDIA QUERIES */
-@media(max-width:1024px) {
-  .container{ width:95%; }
-  .hero::before, .hero::after{ width:300px; height:300px; }
-  .grid{ grid-template-columns:repeat(auto-fill, minmax(250px, 1fr)); }
+/* ==================== */
+/* DESKTOP OPTIMIZATIONS (1024px+) */
+/* ==================== */
+@media(min-width:1025px) {  .container{
+    max-width: 1200px;
+  }
+  
+  .hero::before,
+  .hero::after{
+    width: 500px;
+    height: 500px;
+  }
+  
+  .grid{
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .timeline-item{
+    padding: 0 50px;
+  }
+  
+  .social-center{
+    gap: 80px;
+  }
+  
+  .social-center svg{
+    width: 56px;
+    height: 56px;
+  }
 }
 
+/* ==================== */
+/* TABLET (768px - 1024px) */
+/* ==================== */
+@media(max-width:1024px) {
+  .container{ width:95%; }
+  .hero::before, .hero::after{ width:350px; height:350px; }
+  .grid{ grid-template-columns:repeat(2, 1fr); }
+}
+
+/* ==================== */
+/* MOBILE (max 768px) */
+/* ==================== */
 @media(max-width:768px) {
-  header{ padding:12px 0; position: fixed; left: 0; width: 100%; }
+  header{ 
+    padding:12px 0;
+    position: fixed;
+    left: 0;
+    width: 100%;
+    background:rgba(26, 26, 26, 0.98);
+  }
   nav{ padding:0 4%; flex-wrap:wrap; }
-  .logo-wrapper img{ width:36px; height:36px; }
-  .logo-name{ font-size:1rem; }
+  .logo-wrapper img{ width:38px; height:38px; }  .logo-name{ font-size:1rem; }
   
   .nav-links{
     display:none;
@@ -666,7 +792,7 @@ section h2{
     left:0;
     width:100%;
     background:var(--bg);
-    padding:20px;
+    padding:25px 20px;
     border-bottom:1px solid var(--card);
     gap:15px;
     text-align: center;
@@ -674,31 +800,51 @@ section h2{
   .nav-links.active{ display:flex; }
   .nav-links .btn{ width:100%; justify-content:center; }
   
-  /* LANG SWITCHER - ALWAYS VISIBLE ON MOBILE */
   .lang-switcher{
-    margin: 10px 0 0 0;
+    margin: 15px 0 0 0;
     justify-content: center;
     display: flex !important;
   }
   
   .hamburger{ display:block; }
-  .hero{ margin-top:60px; padding-top:100px; min-height:70vh; }
-  .hero::before, .hero::after{ width:250px; height:250px; }
+  
+  .hero{ 
+    margin-top:60px; 
+    padding-top:100px; 
+    min-height:70vh; 
+  }
+  .hero::before, .hero::after{ width:280px; height:280px; }
   .hero h1{ font-size:clamp(1.8rem, 6vw, 2.5rem); }
-  .hero p{ font-size:clamp(0.9rem, 3vw, 1.1rem); }  .hero-buttons{ flex-direction:row; justify-content:center; gap:10px; }
-  .btn{ width:auto; min-width:130px; padding:10px 20px; font-size:0.85rem; }
+  .hero p{ font-size:clamp(0.9rem, 3vw, 1.1rem); }
+  
+  .hero-buttons{ 
+    flex-direction:row; 
+    justify-content:center; 
+    gap:12px; 
+  }
+  .btn{ width:auto; min-width:140px; padding:12px 24px; font-size:0.9rem; }
+  
   section{ padding:60px 0; text-align: center; }
   section h2{ font-size:clamp(1.3rem, 5vw, 1.8rem); }
-  .tabs{ gap:10px; justify-content: center; }
-  .tab-btn{ padding:10px 18px; font-size:0.85rem; }
+  
+  .tabs{ gap:12px; justify-content: center; }
+  .tab-btn{ padding:10px 20px; font-size:0.9rem; }
+  
   .timeline::before{ left:20px; }
-  .timeline-item{ width:100%; left:0!important; text-align:center!important; padding:0 0 0 50px; }
+  .timeline-item{     width:100%; 
+    left:0!important; 
+    text-align:center!important; 
+    padding:0 0 0 55px; 
+  }
   .timeline-item::before{ left:12px!important; right:auto!important; }
   .timeline-card{ text-align:center; }
-  .social-center{ gap:40px; justify-content: center; }
-  .social-center svg{ width:42px; height:42px; }
+  
+  .social-center{ gap:45px; justify-content: center; }
+  .social-center svg{ width:48px; height:48px; }
+  
   .grid{ grid-template-columns:1fr; gap:20px; justify-items: center; }
   .card{ max-width:100%; }
+  
   .filters{ justify-content:center; }
   .filter-group{ justify-content:center; }
   .filter-group button{ width:auto; max-width:none; }
@@ -706,44 +852,61 @@ section h2{
   .timeline{ text-align: center; }
 }
 
+/* ==================== */
+/* SMALL MOBILE (max 480px) */
+/* ==================== */
 @media(max-width:480px) {
   .container{ width:95%; padding:0 10px; }
   nav{ padding:0 3%; }
-  .logo-wrapper img{ width:32px; height:32px; }
+  .logo-wrapper img{ width:36px; height:36px; }
   .logo-name{ font-size:0.9rem; }
+  
   .hero{ padding-top:80px; min-height:60vh; }
-  .hero::before, .hero::after{ width:200px; height:200px; }
+  .hero::before, .hero::after{ width:220px; height:220px; }
   .hero h1{ font-size:clamp(1.5rem, 7vw, 2rem); }
   .hero p{ font-size:clamp(0.85rem, 4vw, 1rem); }
-  .hero-buttons{ gap:8px; justify-content: center; }
-  .btn{ padding:10px 18px; font-size:0.8rem; min-width:120px; }
-  section{ padding:40px 0; text-align: center; }
+  
+  .hero-buttons{ gap:10px; justify-content: center; }
+  .btn{ padding:10px 20px; font-size:0.85rem; min-width:130px; }
+  
+  section{ padding:50px 0; text-align: center; }
   section h2{ font-size:clamp(1.2rem, 6vw, 1.6rem); }
+  
   .skills span{ padding:8px 16px; font-size:0.8rem; }
-  .timeline-item{ padding:0 0 0 40px; }
+  .timeline-item{ padding:0 0 0 45px; }
   .timeline-card{ padding:20px; }
-  .social-center{ gap:30px; justify-content: center; }
-  .social-center svg{ width:38px; height:38px; }
+  
+  .social-center{ gap:35px; justify-content: center; }
+  .social-center svg{ width:44px; height:44px; }
+  
   .modal-content{ padding:20px; width:95%; }
-  footer{ padding:25px 15px; }
-  footer p{ font-size:0.8rem; }
-  .filter-group button{ padding:8px 16px; font-size:0.75rem; }
+  footer{ padding:25px 15px; }  footer p{ font-size:0.8rem; }
+  .filter-group button{ padding:8px 16px; font-size:0.8rem; }
 }
 
+/* ==================== */
+/* VERY SMALL (max 360px) */
+/* ==================== */
 @media(max-width:360px) {
   .logo-name{ display:none; }
+  .logo-wrapper{ gap: 0; }
   .hero h1{ font-size:1.4rem; }
-  .hero-buttons{ gap:6px; justify-content: center; }
-  .btn{ min-width:110px; padding:8px 14px; font-size:0.75rem; }  .social-center{ gap:25px; justify-content: center; }
+  .hero-buttons{ gap:8px; justify-content: center; }
+  .btn{ min-width:120px; padding:8px 16px; font-size:0.8rem; }
+  .social-center{ gap:28px; justify-content: center; }
   .social-center a{ font-size:0.75rem; }
-  .social-center svg{ width:35px; height:35px; }
-  .filter-group button{ padding:6px 12px; font-size:0.7rem; }
+  .social-center svg{ width:40px; height:40px; }
+  .filter-group button{ padding:6px 12px; font-size:0.75rem; }
 }
 
+/* ==================== */
+/* LARGE DESKTOP (min 1400px) */
+/* ==================== */
 @media(min-width:1400px) {
   .container{ max-width:1400px; }
-  .hero::before, .hero::after{ width:500px; height:500px; }
-  .grid{ grid-template-columns:repeat(auto-fill, minmax(320px, 1fr)); }
+  .hero::before, .hero::after{ width:600px; height:600px; }
+  .grid{ grid-template-columns:repeat(3, 1fr); }
+  .social-center{ gap: 100px; }
 }
 </style>
 </head>
@@ -751,12 +914,13 @@ section h2{
 
 <header>
 <nav>
-  <div class="logo-wrapper">
+  <!-- CLICKABLE AVATAR - OPENS CONTACTS -->
+  <div class="logo-wrapper" onclick="scrollToContact()" title="Открыть контакты">
     <img src="https://picsum.photos/100" alt="Profile">
     <span class="logo-name">Anastasia Gutman</span>
   </div>
   
-  <!-- LANG SWITCHER - OUTSIDE NAV LINKS (ALWAYS VISIBLE) -->
+  <!-- LANG SWITCHER - ALWAYS VISIBLE -->
   <div class="lang-switcher">
     <button class="lang-btn active" onclick="setLanguage('ru')" id="langRU">RU</button>
     <button class="lang-btn" onclick="setLanguage('en')" id="langEN">EN</button>
@@ -765,8 +929,7 @@ section h2{
   <div class="nav-links" id="navLinks">
     <a href="#home" data-translate="nav_home">Главная</a>
     <a href="#portfolio" data-translate="nav_portfolio">Портфолио</a>
-    <a href="#about" data-translate="nav_about">Обо мне</a>
-    <a href="#contact" data-translate="nav_contact">Контакты</a>
+    <a href="#about" data-translate="nav_about">Обо мне</a>    <a href="#contact" data-translate="nav_contact">Контакты</a>
     <button class="btn" onclick="openAdminAuth()" data-translate="btn_admin">Admin</button>
   </div>
   <div class="hamburger" onclick="toggleMenu()">☰</div>
@@ -783,7 +946,8 @@ section h2{
   </div>
 </section>
 
-<section id="portfolio" class="container">  <h2 data-translate="section_portfolio">Портфолио</h2>
+<section id="portfolio" class="container">
+  <h2 data-translate="section_portfolio">Портфолио</h2>
   <div class="filters">
     <div class="filter-group" id="categoryFilters"></div>
     <div class="filter-group" id="typeFilters"></div>
@@ -814,8 +978,7 @@ section h2{
   </div>
   <div id="experience" class="tab-content">
     <p style="color:var(--text-secondary);margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto;" data-translate="experience_text">
-      Мой профессиональный путь в дизайне.
-    </p>
+      Мой профессиональный путь в дизайне.    </p>
     <div class="timeline">
       <div class="timeline-item">
         <div class="timeline-card">
@@ -832,7 +995,8 @@ section h2{
           <span class="year">2022 — 2024</span>
           <p data-translate="exp2_desc">Проектирование мобильных приложений.</p>
         </div>
-      </div>      <div class="timeline-item">
+      </div>
+      <div class="timeline-item">
         <div class="timeline-card">
           <h3>Junior Designer</h3>
           <p class="company">Creative Agency</p>
@@ -863,8 +1027,7 @@ section h2{
       <svg viewBox="0 0 24 24"><path d="M9.04 15.47l-.39 4.06c.56 0 .8-.24 1.09-.53l2.61-2.5"/></svg>
       <span>Telegram</span>
     </a>
-    <a href="https://www.instagram.com/anastasiagutman" target="_blank">
-      <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z"/></svg>
+    <a href="https://www.instagram.com/anastasiagutman" target="_blank">      <svg viewBox="0 0 24 24"><path d="M7 2h10a5 5 0 015 5v10a5 5 0 01-5 5H7a5 5 0 01-5-5V7a5 5 0 015-5z"/></svg>
       <span>Instagram</span>
     </a>
   </div>
@@ -881,7 +1044,8 @@ section h2{
 
 <script>
 // =====================
-// TRANSLATIONS// =====================
+// TRANSLATIONS
+// =====================
 const translations = {
   ru: {
     nav_home: "Главная",
@@ -912,8 +1076,7 @@ const translations = {
     filter_cases: "Кейсы",
     filter_design: "Оформление",
     filter_logos: "Логотипы",
-    filter_team: "Командные",
-    filter_solo: "Одиночные",
+    filter_team: "Командные",    filter_solo: "Одиночные",
     btn_close: "Закрыть",
     landing_not_ready: "⚠️ Лендинг ещё не загружен",
     tools: "Инструменты",
@@ -930,7 +1093,8 @@ const translations = {
   },
   en: {
     nav_home: "Home",
-    nav_portfolio: "Portfolio",    nav_about: "About",
+    nav_portfolio: "Portfolio",
+    nav_about: "About",
     nav_contact: "Contact",
     btn_admin: "Admin",
     hero_title: "Designing Experiences That Matter",
@@ -961,8 +1125,7 @@ const translations = {
     btn_close: "Close",
     landing_not_ready: "⚠️ Landing page not ready",
     tools: "Tools",
-    admin_panel: "Admin Panel",
-    profile: "Profile",
+    admin_panel: "Admin Panel",    profile: "Profile",
     save_profile: "Save Profile",
     add_project: "Add Project",
     delete_project: "Delete Project",
@@ -977,20 +1140,32 @@ const translations = {
 let currentLang = localStorage.getItem('portfolioLang') || 'ru';
 
 // =====================
-// LANGUAGE SWITCHER - FIXED
+// SCROLL TO CONTACT
 // =====================
-function setLanguage(lang) {  console.log("Switching to: " + lang);
+function scrollToContact() {
+  const contactSection = document.getElementById('contact');
+  if(contactSection) {
+    contactSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }
+  // Close mobile menu if open
+  const navLinks = document.getElementById('navLinks');
+  if(navLinks) navLinks.classList.remove('active');
+}
+
+// =====================
+// LANGUAGE SWITCHER
+// =====================
+function setLanguage(lang) {
+  console.log("Switching to: " + lang);
   currentLang = lang;
   localStorage.setItem('portfolioLang', lang);
   
-  // Update buttons visibility
   const ruBtn = document.getElementById('langRU');
   const enBtn = document.getElementById('langEN');
   
   if(ruBtn) ruBtn.classList.toggle('active', lang === 'ru');
   if(enBtn) enBtn.classList.toggle('active', lang === 'en');
   
-  // Update all translatable elements
   document.querySelectorAll('[data-translate]').forEach(function(el) {
     const key = el.getAttribute('data-translate');
     if (translations[lang] && translations[lang][key]) {
@@ -998,11 +1173,8 @@ function setLanguage(lang) {  console.log("Switching to: " + lang);
     }
   });
   
-  // Re-render portfolio filters with new language
   renderFilters();
-  
-  console.log("Language set to: " + lang);
-}
+  console.log("Language set to: " + lang);}
 
 // =====================
 // AUTH
@@ -1028,7 +1200,8 @@ function saveState() {
 
 // =====================
 // MENU
-// =====================function toggleMenu() {
+// =====================
+function toggleMenu() {
   const nav = document.getElementById("navLinks");
   if (nav) nav.classList.toggle("active");
 }
@@ -1050,8 +1223,7 @@ function switchTab(tabName, btnElement) {
 
 // =====================
 // PORTFOLIO
-// =====================
-const categories = {
+// =====================const categories = {
   ru: ["Все", "Веб-платформы", "Приложения", "Кейсы", "Оформление", "Логотипы"],
   en: ["All", "Websites", "Apps", "Cases", "Design", "Logos"]
 };
@@ -1077,7 +1249,8 @@ function renderFilters() {
     btn.textContent = cat;
     if (cat === activeCategory) btn.classList.add("active");
     btn.onclick = function() { 
-      activeCategory = cat;       render(); 
+      activeCategory = cat; 
+      render(); 
     };
     catContainer.appendChild(btn);
   });
@@ -1096,21 +1269,14 @@ function renderFilters() {
 
 function render() {
   const grid = document.getElementById("portfolioGrid");
-  if (!grid) {
-    console.log("Grid not found!");
-    return;
-  }
+  if (!grid) return;
   
-  console.log("Rendering portfolio...");
   grid.innerHTML = "";
   renderFilters();
-
   let filtered = state.projects.filter(function(p) {
     return (activeCategory === categories[currentLang][0] || p.category === activeCategory) &&
            (activeType === types[currentLang][0] || p.type === activeType);
   });
-
-  console.log("Filtered projects: " + filtered.length);
 
   filtered.forEach(function(p) {
     const card = document.createElement("div");
@@ -1126,6 +1292,7 @@ function render() {
     grid.appendChild(card);
   });
 }
+
 // =====================
 // LANDING
 // =====================
@@ -1154,7 +1321,6 @@ function closeModal() {
   const modal = document.getElementById("modal");
   if (modal) modal.style.display = "none";
 }
-
 // =====================
 // ADMIN
 // =====================
@@ -1175,7 +1341,8 @@ function openAdmin() {
   const content = document.getElementById("modalContent");
   if (!modal || !content) return;
 
-  const t = translations[currentLang];  
+  const t = translations[currentLang];
+  
   content.innerHTML = 
     '<h2>' + t.admin_panel + '</h2>' +
     '<h3>' + t.profile + '</h3>' +
@@ -1203,7 +1370,6 @@ function saveProfile() {
   saveState();
   alert(translations[currentLang].saved);
 }
-
 function addProject() {
   const newProject = {
     id: Date.now(),
@@ -1224,22 +1390,18 @@ function addProject() {
 function deleteProject() {
   const id = parseInt(document.getElementById("deleteId").value);
   state.projects = state.projects.filter(function(p) { return p.id !== id; });
-  saveState();  render();
+  saveState();
+  render();
   alert(translations[currentLang].deleted);
 }
 
 // =====================
-// INIT - FIXED
+// INIT
 // =====================
 document.addEventListener("DOMContentLoaded", function() {
   console.log("=== DOM LOADED ===");
-  
-  // Set initial language
   setLanguage(currentLang);
-  
-  // Render portfolio
   render();
-  
   console.log("=== INIT COMPLETE ===");
   console.log("Current language: " + currentLang);
   console.log("Projects loaded: " + state.projects.length);
