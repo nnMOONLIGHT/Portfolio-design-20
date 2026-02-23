@@ -7,36 +7,58 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500&family=Poppins:wght@500;600;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
+:root {
   --bg:#1A1A1A;
   --text:#FFFFFF;
   --text-secondary:#E0E0E0;
   --accent:#B19CD9;
   --accent-hover:#C8A2C8;
   --card:#2C2C2C;
-  --glass: rgba(255,255,255,0.05);
-  --glass-border: rgba(255,255,255,0.1);
+  --glass: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.1);
 }
 
 *{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth}
+
 body{
   font-family:'Inter',sans-serif;
   background:var(--bg);
   color:var(--text);
   line-height:1.6;
   overflow-x:hidden;
-  padding-top:80px;
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  padding-top:80px; /* компенсация fixed header */
 }
+
+img{
+  max-width:100%;
+  height:auto;
+}
+
+.main-content{
+  flex:1;
+}
+
+h1,h2,h3{
+  font-family:'Poppins',sans-serif;
+  text-align:center;
+}
+
+p{text-align:center}
+a{text-decoration:none;color:inherit}
 
 .container{
   width:90%;
   max-width:1200px;
   margin:auto;
-  padding:0 15px;
 }
 
-section{padding:80px 0;text-align:center}
+section{
+  padding:80px 0;
+}
 
 /* HEADER */
 header{
@@ -45,6 +67,7 @@ header{
   left:0;
   width:100%;
   background:var(--bg);
+  padding:15px 0;
   border-bottom:1px solid var(--card);
   z-index:1000;
 }
@@ -53,25 +76,24 @@ nav{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  padding:15px 5%;
+  padding:0 5%;
 }
 
 .logo-wrapper{
   display:flex;
   align-items:center;
-  gap:10px;
+  gap:12px;
 }
 
 .logo-wrapper img{
-  width:40px;
-  height:40px;
+  width:42px;
+  height:42px;
   border-radius:50%;
   object-fit:cover;
   border:2px solid var(--accent);
 }
 
 .logo-name{
-  font-family:'Poppins',sans-serif;
   font-weight:600;
 }
 
@@ -79,47 +101,32 @@ nav{
   display:flex;
   gap:20px;
   align-items:center;
+  transition:0.3s ease;
 }
 
-.nav-links a:hover{color:var(--accent)}
-
-.lang-switcher{
-  display:flex;
-  gap:5px;
-}
-
-.lang-btn{
-  background:var(--card);
-  border:1px solid var(--glass-border);
-  color:var(--text-secondary);
-  padding:6px 12px;
-  border-radius:30px;
-  cursor:pointer;
-  font-size:0.8rem;
-}
-
-.lang-btn.active{
-  background:var(--accent);
-  color:#fff;
+.nav-links a:hover{
+  color:var(--accent);
 }
 
 .hamburger{
   display:none;
-  font-size:1.6rem;
   cursor:pointer;
+  font-size:1.5rem;
 }
 
 /* HERO */
 .hero{
-  min-height:70vh;
+  min-height:calc(100vh - 80px);
   display:flex;
   flex-direction:column;
   justify-content:center;
   align-items:center;
+  text-align:center;
+  padding:60px 20px;
 }
 
 .hero h1{
-  font-size:clamp(2rem,5vw,3rem);
+  font-size:clamp(2rem,5vw,3.5rem);
   margin-bottom:20px;
 }
 
@@ -131,19 +138,15 @@ nav{
 .hero-buttons{
   display:flex;
   gap:15px;
-  flex-wrap:wrap;
-  justify-content:center;
 }
 
 .btn{
-  padding:12px 25px;
-  border-radius:30px;
+  padding:12px 28px;
+  background:var(--accent);
+  border-radius:34px;
   border:none;
   cursor:pointer;
-  background:var(--accent);
-  color:#fff;
   transition:0.3s;
-  font-size:0.9rem;
 }
 
 .btn:hover{
@@ -156,30 +159,11 @@ nav{
   border:2px solid var(--accent);
 }
 
-/* PORTFOLIO */
-.filters{
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-  justify-content:center;
-  margin-bottom:30px;
-}
-
-.filters button{
-  background:var(--card);
-  border:none;
-  color:var(--text-secondary);
-  padding:8px 18px;
-  border-radius:30px;
-  cursor:pointer;
-}
-
-.filters button.active,
-.filters button:hover{
+.btn.secondary:hover{
   background:var(--accent);
-  color:#fff;
 }
 
+/* GRID */
 .grid{
   display:grid;
   grid-template-columns:repeat(auto-fill,minmax(280px,1fr));
@@ -188,79 +172,108 @@ nav{
 
 .card{
   background:var(--card);
-  border-radius:20px;
+  border-radius:34px;
   overflow:hidden;
-  cursor:pointer;
   transition:0.3s;
-  border:1px solid var(--glass-border);
 }
 
 .card:hover{
   transform:translateY(-6px);
+  box-shadow:0 10px 40px rgba(177,156,217,0.2);
 }
 
-.card img{width:100%;display:block}
-
-.card-content{padding:20px}
-
-.tag{
-  font-size:0.8rem;
-  color:var(--accent);
-}
-
-.badge{
-  float:right;
-  font-size:0.7rem;
-  padding:4px 10px;
-  border-radius:20px;
-}
-
-.badge.team{background:var(--accent);color:#fff}
-.badge.solo{background:#444;color:#fff}
-
-/* MODAL */
-.modal{
-  position:fixed;
-  inset:0;
-  background:rgba(0,0,0,0.8);
-  display:none;
-  justify-content:center;
-  align-items:center;
+.card-content{
   padding:20px;
-  z-index:2000;
+  text-align:center;
 }
 
-.modal-content{
+/* TIMELINE */
+.timeline{
+  max-width:800px;
+  margin:auto;
+}
+
+.timeline-item{
+  margin-bottom:30px;
+}
+
+.timeline-card{
+  background:var(--glass);
+  border:1px solid var(--glass-border);
+  border-radius:34px;
+  padding:25px;
+  text-align:left;
+}
+
+/* CONTACT */
+.social-center{
+  display:flex;
+  justify-content:center;
+  flex-wrap:wrap;
+  gap:60px;
+}
+
+/* FOOTER */
+footer{
   background:var(--card);
+  text-align:center;
   padding:30px;
-  max-width:500px;
-  width:100%;
-  border-radius:20px;
-}
-
-.modal img{
-  width:100%;
-  border-radius:15px;
-  margin:20px 0;
+  margin-top:auto;
 }
 
 /* MOBILE */
 @media(max-width:768px){
 
+  nav{flex-wrap:wrap;}
+
   .nav-links{
-    display:none;
+    flex-direction:column;
     position:absolute;
     top:100%;
     left:0;
     width:100%;
     background:var(--bg);
-    flex-direction:column;
     padding:20px;
+    border-bottom:1px solid var(--card);
+    gap:15px;
+    max-height:0;
+    overflow:hidden;
   }
 
-  .nav-links.active{display:flex}
+  .nav-links.active{
+    max-height:500px;
+  }
 
-  .hamburger{display:block}
+  .hamburger{
+    display:block;
+  }
+
+  .hero-buttons{
+    flex-direction:column;
+    width:100%;
+    max-width:280px;
+  }
+
+  .hero-buttons .btn{
+    width:100%;
+  }
+
+  .grid{
+    grid-template-columns:1fr;
+  }
+
+  section{
+    padding:60px 0;
+  }
+
+  .social-center{
+    gap:30px;
+  }
+
+  .timeline-item{
+    padding:0;
+  }
+
 }
 </style>
 </head>
@@ -270,28 +283,26 @@ nav{
 <header>
 <nav>
   <div class="logo-wrapper">
-    <img src="https://picsum.photos/100">
+    <img src="https://picsum.photos/100" alt="Profile">
     <span class="logo-name">Anastasia Gutman</span>
   </div>
 
   <div class="nav-links" id="navLinks">
     <a href="#home">Главная</a>
     <a href="#portfolio">Портфолио</a>
+    <a href="#about">Обо мне</a>
     <a href="#contact">Контакты</a>
-
-    <div class="lang-switcher">
-      <button class="lang-btn active" onclick="setLanguage('ru')" id="langRU">RU</button>
-      <button class="lang-btn" onclick="setLanguage('en')" id="langEN">EN</button>
-    </div>
   </div>
 
   <div class="hamburger" onclick="toggleMenu()">☰</div>
 </nav>
 </header>
 
+<div class="main-content">
+
 <section id="home" class="hero container">
-  <h1 id="heroTitle">Designing Experiences That Matter</h1>
-  <p id="heroSubtitle">Minimal. Functional. Strategic.</p>
+  <h1>Designing Experiences That Matter</h1>
+  <p>Minimal. Functional. Strategic.</p>
   <div class="hero-buttons">
     <a href="#portfolio" class="btn">Смотреть работы</a>
     <a href="#contact" class="btn secondary">Связаться</a>
@@ -300,128 +311,47 @@ nav{
 
 <section id="portfolio" class="container">
   <h2>Портфолио</h2>
-  <div class="filters" id="filters"></div>
-  <div class="grid" id="portfolioGrid"></div>
+  <div class="grid">
+    <div class="card">
+      <img src="https://picsum.photos/600/400?1">
+      <div class="card-content">
+        <h3>Website Redesign</h3>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="about" class="container">
+  <h2>Обо мне</h2>
+  <div class="timeline">
+    <div class="timeline-item">
+      <div class="timeline-card">
+        <h3>Senior UI/UX Designer</h3>
+        <p>Digital Studio Moscow</p>
+      </div>
+    </div>
+  </div>
 </section>
 
 <section id="contact" class="container">
-  <h2>Контакты</h2>
-  <p style="color:var(--text-secondary)">Dribbble / Behance / Telegram</p>
+  <h2>Связаться со мной</h2>
+  <div class="social-center">
+    <span>Dribbble</span>
+    <span>Behance</span>
+    <span>Telegram</span>
+  </div>
 </section>
 
-<div class="modal" id="modal">
-  <div class="modal-content" id="modalContent"></div>
 </div>
 
+<footer>
+  <p>© 2026 Анастасия Гутман</p>
+</footer>
+
 <script>
-
-/* ===== LANGUAGE ===== */
-
-let currentLang = 'ru';
-
-function setLanguage(lang){
-  currentLang = lang;
-  document.getElementById('langRU').classList.toggle('active', lang==='ru');
-  document.getElementById('langEN').classList.toggle('active', lang==='en');
-  render();
-}
-
-/* ===== DATA STRUCTURE ===== */
-
-const categories = {
-  all:{ru:"Все",en:"All"},
-  websites:{ru:"Веб-платформы",en:"Websites"},
-  apps:{ru:"Приложения",en:"Apps"},
-  logos:{ru:"Логотипы",en:"Logos"}
-};
-
-const types = {
-  all:{ru:"Все",en:"All"},
-  team:{ru:"Командные",en:"Team"},
-  solo:{ru:"Одиночные",en:"Solo"}
-};
-
-let activeCategory="all";
-
-const projects=[
-  {id:1,title:"Website Redesign",category:"websites",type:"solo",img:"https://picsum.photos/600/400?1",desc:"Modern website redesign"},
-  {id:2,title:"Mobile App",category:"apps",type:"team",img:"https://picsum.photos/600/400?2",desc:"Fitness tracking app"},
-  {id:3,title:"Brand Identity",category:"logos",type:"solo",img:"https://picsum.photos/600/400?3",desc:"Full brand package"}
-];
-
-/* ===== RENDER ===== */
-
-function render(){
-  renderFilters();
-  renderProjects();
-}
-
-function renderFilters(){
-  const container=document.getElementById("filters");
-  container.innerHTML="";
-  Object.keys(categories).forEach(key=>{
-    const btn=document.createElement("button");
-    btn.textContent=categories[key][currentLang];
-    if(key===activeCategory)btn.classList.add("active");
-    btn.onclick=()=>{activeCategory=key;render()};
-    container.appendChild(btn);
-  });
-}
-
-function renderProjects(){
-  const grid=document.getElementById("portfolioGrid");
-  grid.innerHTML="";
-  projects
-    .filter(p=>activeCategory==="all"||p.category===activeCategory)
-    .forEach(p=>{
-      const card=document.createElement("div");
-      card.className="card";
-      card.innerHTML=`
-        <img src="${p.img}">
-        <div class="card-content">
-          <span class="tag">${categories[p.category][currentLang]}</span>
-          <span class="badge ${p.type}">${types[p.type][currentLang]}</span>
-          <h3>${p.title}</h3>
-        </div>`;
-      card.onclick=()=>openModal(p);
-      grid.appendChild(card);
-    });
-}
-
-/* ===== MODAL ===== */
-
-function openModal(p){
-  const modal=document.getElementById("modal");
-  const content=document.getElementById("modalContent");
-  content.innerHTML=`
-    <h3>${p.title}</h3>
-    <img src="${p.img}">
-    <p>${p.desc}</p>
-    <button class="btn" onclick="closeModal()">Закрыть</button>
-  `;
-  modal.style.display="flex";
-}
-
-function closeModal(){
-  document.getElementById("modal").style.display="none";
-}
-
-/* ===== MENU ===== */
-
 function toggleMenu(){
   document.getElementById("navLinks").classList.toggle("active");
 }
-
-document.querySelectorAll('.nav-links a').forEach(link=>{
-  link.addEventListener('click',()=>{
-    document.getElementById("navLinks").classList.remove("active");
-  });
-});
-
-/* ===== INIT ===== */
-
-render();
-
 </script>
 
 </body>
