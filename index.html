@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, maximum-scale=1.0" />
   <meta name="description" content="Портфолио дизайнера: кейсы, проекты, контакты." />
   <meta name="theme-color" content="#1A1A1A" />
   <title>Дизайнерское портфолио</title>
@@ -26,7 +26,11 @@
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    html { scroll-behavior: smooth; }
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden; /* iOS: важно дублировать на html */
+      width: 100%;
+    }
 
     body {
       font-family: 'Inter', sans-serif;
@@ -37,10 +41,18 @@
       line-height: 1.6;
       overflow-x: hidden;
       width: 100%;
+      max-width: 100vw;
       min-height: 100vh;
+      min-height: 100dvh; /* корректнее на мобилках */
       display: flex;
       flex-direction: column;
+      overscroll-behavior: none; /* убирает резину/refresh (Chrome/Android) */
+      touch-action: pan-y; /* запрещаем горизонтальный "drag" */
     }
+
+    /* страхуемся от горизонтального overflow у вложенных блоков */
+    img, svg, video, canvas { max-width: 100%; }
+    .main-content { max-width: 100vw; }
 
     .main-content { flex: 1; width: 100%; }
 
@@ -391,15 +403,17 @@
       border-radius: var(--radius);
       overflow: hidden;
       cursor: pointer;
-      transition: 0.3s;
+      transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.3s ease;
       border: 1px solid rgba(255,255,255,0.10);
       width: 100%;
       max-width: 380px;
       position: relative;
+      transform-style: preserve-3d;
+      box-shadow: 0 18px 45px rgba(0,0,0,0.55);
     }
 
     .card:hover {
-      transform: translateY(-6px);
+      transform: translateY(-8px) rotate3d(1, -1, 0, 10deg);
       box-shadow: var(--shadow);
       border-color: rgba(177,156,217,0.45);
     }
@@ -767,6 +781,33 @@
       margin-top: 14px;
     }
 
+    .project-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .project-link-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 0.8rem;
+      color: var(--text-secondary);
+      transition: 0.25s ease;
+    }
+
+    .project-link-chip:hover {
+      background: rgba(177,156,217,0.25);
+      border-color: rgba(177,156,217,0.5);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
     /* ==================== */
     /* MEDIA QUERIES */
     /* ==================== */
@@ -827,7 +868,13 @@
 
       .social-center { gap: 45px; justify-content: center; }
       .grid { grid-template-columns: 1fr; gap: 20px; justify-items: center; }
-      .card { max-width: 100%; }
+      .card {
+        max-width: 100%;
+        transform: translateY(0) !important;
+      }
+      .card:hover {
+        transform: translateY(-4px) !important;
+      }
     }
 
     @media (max-width: 480px) {
@@ -848,6 +895,11 @@
       footer { padding: 25px 15px; }
       footer p { font-size: 0.8rem; }
       .filter-group button { padding: 8px 16px; font-size: 0.8rem; }
+
+      /* iOS Safari: предотвращаем автозум на input/select */
+      .modal-content input,
+      .modal-content select,
+      .modal-content textarea { font-size: 16px; }
     }
 
     @media (max-width: 360px) {
@@ -942,32 +994,7 @@
         <p style="color:var(--text-secondary);margin-bottom:30px;max-width:700px;margin-left:auto;margin-right:auto;" data-translate="experience_text">
           Мой профессиональный путь в дизайне.
         </p>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-card">
-              <h3>Senior UI/UX Designer</h3>
-              <p class="company">Digital Studio Moscow</p>
-              <span class="year">2024 — <span data-translate="present">Настоящее время</span></span>
-              <p data-translate="exp1_desc">Ведущий дизайнер в команде.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-card">
-              <h3>Middle UI Designer</h3>
-              <p class="company">Tech Startup SPb</p>
-              <span class="year">2022 — 2024</span>
-              <p data-translate="exp2_desc">Проектирование мобильных приложений.</p>
-            </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-card">
-              <h3>Junior Designer</h3>
-              <p class="company">Creative Agency</p>
-              <span class="year">2021 — 2022</span>
-              <p data-translate="exp3_desc">Создание визуального контента.</p>
-            </div>
-          </div>
-        </div>
+        <div class="timeline" id="experienceTimeline"></div>
       </div>
     </section>
 
@@ -1050,9 +1077,12 @@
         tools: "Инструменты",
         admin_panel: "Admin Panel",
         profile: "Профиль",
-        save_profile: "Сохранить профиль",
+        avatar: "Аватар",
+        change_avatar: "Загрузить аватар",
+        admin_experience: "Опыт работы",
         add_project: "Добавить проект",
         delete_project: "Удалить проект",
+        project_list: "Список проектов",
         delete: "Удалить",
         project_added: "Проект добавлен",
         deleted: "Удалено",
@@ -1064,9 +1094,16 @@
         field_type: "Тип",
         field_image: "URL изображения",
         field_landing: "URL лендинга (необязательно)",
+        field_dribbble: "Ссылка на Dribbble",
+        field_behance: "Ссылка на Behance",
+        field_external: "Другая ссылка (Case study, GitHub и т.д.)",
         field_desc: "Описание",
         field_tools: "Инструменты (через запятую)",
         field_delete_id: "ID проекта",
+        field_role: "Должность",
+        field_company: "Компания",
+        field_years: "Годы",
+        field_exp_desc: "Описание (чем занималась)",
         btn_cancel: "Отмена"
       },
       en: {
@@ -1108,9 +1145,12 @@
         tools: "Tools",
         admin_panel: "Admin Panel",
         profile: "Profile",
-        save_profile: "Save Profile",
+        avatar: "Avatar",
+        change_avatar: "Upload avatar",
+        admin_experience: "Experience",
         add_project: "Add Project",
         delete_project: "Delete Project",
+        project_list: "Projects list",
         delete: "Delete",
         project_added: "Project added",
         deleted: "Deleted",
@@ -1122,9 +1162,16 @@
         field_type: "Type",
         field_image: "Image URL",
         field_landing: "Landing URL (optional)",
+        field_dribbble: "Dribbble link",
+        field_behance: "Behance link",
+        field_external: "Other link (case study, GitHub, etc.)",
         field_desc: "Description",
         field_tools: "Tools (comma separated)",
         field_delete_id: "Project ID",
+        field_role: "Role",
+        field_company: "Company",
+        field_years: "Years",
+        field_exp_desc: "Description (what you did)",
         btn_cancel: "Cancel"
       }
     };
@@ -1150,6 +1197,29 @@
     function defaultState() {
       return {
         profile: { name: "Анастасия Гутман", avatar: "" },
+        experience: [
+          {
+            id: 1,
+            role: "Senior UI/UX Designer",
+            company: "Digital Studio Moscow",
+            years: "2024 — " + translations[currentLang].present,
+            descKey: "exp1_desc"
+          },
+          {
+            id: 2,
+            role: "Middle UI Designer",
+            company: "Tech Startup SPb",
+            years: "2022 — 2024",
+            descKey: "exp2_desc"
+          },
+          {
+            id: 3,
+            role: "Junior Designer",
+            company: "Creative Agency",
+            years: "2021 — 2022",
+            descKey: "exp3_desc"
+          }
+        ],
         projects: [
           {
             id: 1,
@@ -1159,7 +1229,12 @@
             images: ["https://picsum.photos/900/600?random=11"],
             desc: "Modern website redesign focused on clarity and conversion.",
             tools: ["Figma", "Webflow"],
-            url: ""
+            url: "",
+            links: {
+              dribbble: "",
+              behance: "",
+              external: ""
+            }
           },
           {
             id: 2,
@@ -1169,7 +1244,12 @@
             images: ["https://picsum.photos/900/600?random=22"],
             desc: "Fitness tracking app interface with a focus on habit formation.",
             tools: ["Figma"],
-            url: ""
+            url: "",
+            links: {
+              dribbble: "",
+              behance: "",
+              external: ""
+            }
           },
           {
             id: 3,
@@ -1179,7 +1259,12 @@
             images: ["https://picsum.photos/900/600?random=33"],
             desc: "Logo and brand system for a boutique studio.",
             tools: ["Illustrator"],
-            url: ""
+            url: "",
+            links: {
+              dribbble: "",
+              behance: "",
+              external: ""
+            }
           }
         ]
       };
@@ -1206,6 +1291,11 @@
           const categoryKey = mapCatRu[p.category] || "design";
           const typeKey = mapTypeRu[p.type] || "solo";
           const images = Array.isArray(p.img) ? p.img : (p.img ? [p.img] : []);
+          const links = p.links || {
+            dribbble: p.dribbble || "",
+            behance: p.behance || "",
+            external: p.external || ""
+          };
           return {
             id: p.id || Date.now(),
             title: p.title || "Untitled",
@@ -1214,7 +1304,8 @@
             images: images.length ? images : ["https://picsum.photos/900/600?random=" + Math.floor(Math.random() * 1000)],
             desc: p.desc || "",
             tools: Array.isArray(p.tools) ? p.tools.map(x => String(x).trim()).filter(Boolean) : [],
-            url: p.url || ""
+            url: p.url || "",
+            links
           };
         });
       }
@@ -1224,6 +1315,7 @@
       st.profile.name = st.profile.name || "Анастасия Гутман";
       st.profile.avatar = st.profile.avatar || "";
       st.projects = Array.isArray(st.projects) ? st.projects : [];
+      st.experience = Array.isArray(st.experience) ? st.experience : defaultState().experience;
       return st;
     }
 
@@ -1409,6 +1501,47 @@
 
         grid.appendChild(card);
       });
+
+      renderExperienceTimeline();
+    }
+
+    function renderExperienceTimeline() {
+      const container = document.getElementById("experienceTimeline");
+      if (!container) return;
+      container.innerHTML = "";
+
+      (state.experience || []).forEach((item) => {
+        const wrapper = document.createElement("div");
+        wrapper.className = "timeline-item";
+
+        const card = document.createElement("div");
+        card.className = "timeline-card";
+
+        const h3 = document.createElement("h3");
+        h3.textContent = item.role;
+
+        const company = document.createElement("p");
+        company.className = "company";
+        company.textContent = item.company;
+
+        const spanYear = document.createElement("span");
+        spanYear.className = "year";
+        spanYear.textContent = item.years;
+
+        const p = document.createElement("p");
+        if (item.descKey && translations[currentLang][item.descKey]) {
+          p.textContent = translations[currentLang][item.descKey];
+        } else {
+          p.textContent = item.desc || "";
+        }
+
+        card.appendChild(h3);
+        card.appendChild(company);
+        card.appendChild(spanYear);
+        card.appendChild(p);
+        wrapper.appendChild(card);
+        container.appendChild(wrapper);
+      });
     }
 
     // =====================
@@ -1442,6 +1575,25 @@
       toolsP.appendChild(strong);
       toolsP.appendChild(document.createTextNode((project.tools || []).join(", ")));
 
+      const linksWrap = document.createElement("div");
+      linksWrap.className = "project-links";
+      const links = project.links || {};
+
+      function addLink(icon, label, url) {
+        if (!url || !String(url).trim()) return;
+        const a = document.createElement("a");
+        a.href = url;
+        a.target = "_blank";
+        a.rel = "noreferrer";
+        a.className = "project-link-chip";
+        a.innerHTML = icon + "<span>" + label + "</span>";
+        linksWrap.appendChild(a);
+      }
+
+      addLink("▸", "Dribbble", links.dribbble);
+      addLink("▸", "Behance", links.behance);
+      addLink("▸", "Case", links.external);
+
       const hint = document.createElement("p");
       hint.style.color = "var(--accent)";
       hint.style.marginTop = "14px";
@@ -1460,6 +1612,9 @@
       content.appendChild(img);
       content.appendChild(desc);
       content.appendChild(toolsP);
+      if (linksWrap.childElementCount) {
+        content.appendChild(linksWrap);
+      }
       content.appendChild(hint);
       content.appendChild(actions);
 
@@ -1485,6 +1640,8 @@
       if (!content) return;
       content.innerHTML = "";
 
+      let newProjectImageData = "";
+
       const h2 = document.createElement("h2");
       h2.textContent = t("admin_panel");
 
@@ -1502,6 +1659,30 @@
       nameField.appendChild(nameLabel);
       nameField.appendChild(nameInput);
 
+      const avatarField = document.createElement("div");
+      avatarField.className = "field";
+      const avatarLabel = document.createElement("label");
+      avatarLabel.setAttribute("for", "adminAvatar");
+      avatarLabel.textContent = t("avatar");
+      const avatarInput = document.createElement("input");
+      avatarInput.id = "adminAvatar";
+      avatarInput.type = "file";
+      avatarInput.accept = "image/*";
+      avatarField.appendChild(avatarLabel);
+      avatarField.appendChild(avatarInput);
+
+      avatarInput.addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          state.profile.avatar = ev.target.result;
+          saveState();
+          applyProfileToHeader();
+        };
+        reader.readAsDataURL(file);
+      });
+
       const saveBtn = document.createElement("button");
       saveBtn.type = "button";
       saveBtn.className = "btn";
@@ -1510,6 +1691,48 @@
         state.profile.name = document.getElementById("adminName").value;
         saveState();
         applyProfileToHeader();
+        alert(t("saved"));
+      });
+
+      const h3Exp = document.createElement("h3");
+      h3Exp.textContent = t("admin_experience");
+
+      const expList = document.createElement("div");
+      expList.style.marginBottom = "10px";
+      expList.style.fontSize = "0.85rem";
+      expList.style.color = "var(--text-secondary)";
+      expList.innerHTML = (state.experience || []).map(e =>
+        "#" + e.id + " — " + e.role + " @ " + e.company
+      ).join("<br>");
+
+      const expRoleInput = document.createElement("input");
+      const expRoleField = makeField("expRole", "field_role", expRoleInput);
+
+      const expCompanyInput = document.createElement("input");
+      const expCompanyField = makeField("expCompany", "field_company", expCompanyInput);
+
+      const expYearsInput = document.createElement("input");
+      const expYearsField = makeField("expYears", "field_years", expYearsInput);
+
+      const expDescInput = document.createElement("textarea");
+      const expDescField = makeField("expDesc", "field_exp_desc", expDescInput);
+
+      const expAddBtn = document.createElement("button");
+      expAddBtn.type = "button";
+      expAddBtn.className = "btn";
+      expAddBtn.textContent = t("admin_experience");
+      expAddBtn.addEventListener("click", () => {
+        const item = {
+          id: Date.now(),
+          role: (document.getElementById("expRole").value || "").trim(),
+          company: (document.getElementById("expCompany").value || "").trim(),
+          years: (document.getElementById("expYears").value || "").trim(),
+          desc: (document.getElementById("expDesc").value || "").trim()
+        };
+        if (!item.role || !item.company) return;
+        state.experience.push(item);
+        saveState();
+        renderExperienceTimeline();
         alert(t("saved"));
       });
 
@@ -1550,10 +1773,34 @@
       const typeField = makeField("pType", "field_type", typeSelect);
 
       const imgInput = document.createElement("input");
+      imgInput.type = "file";
+      imgInput.accept = "image/*";
       const imgField = makeField("pImg", "field_image", imgInput);
+
+      imgInput.addEventListener("change", (e) => {
+        const file = e.target.files && e.target.files[0];
+        if (!file) {
+          newProjectImageData = "";
+          return;
+        }
+        const reader = new FileReader();
+        reader.onload = function(ev) {
+          newProjectImageData = ev.target.result;
+        };
+        reader.readAsDataURL(file);
+      });
 
       const urlInput = document.createElement("input");
       const urlField = makeField("pUrl", "field_landing", urlInput);
+
+      const dribbbleInput = document.createElement("input");
+      const dribbbleField = makeField("pDribbble", "field_dribbble", dribbbleInput);
+
+      const behanceInput = document.createElement("input");
+      const behanceField = makeField("pBehance", "field_behance", behanceInput);
+
+      const externalInput = document.createElement("input");
+      const externalField = makeField("pExternal", "field_external", externalInput);
 
       const descInput = document.createElement("textarea");
       const descField = makeField("pDesc", "field_desc", descInput);
@@ -1571,13 +1818,18 @@
           title: (document.getElementById("pTitle").value || "").trim() || "Untitled",
           categoryKey: document.getElementById("pCategory").value,
           typeKey: document.getElementById("pType").value,
-          images: [document.getElementById("pImg").value || ""].filter(Boolean),
+          images: [newProjectImageData].filter(Boolean),
           url: (document.getElementById("pUrl").value || "").trim(),
           desc: (document.getElementById("pDesc").value || "").trim(),
           tools: (document.getElementById("pTools").value || "")
             .split(",")
             .map(s => s.trim())
-            .filter(Boolean)
+            .filter(Boolean),
+          links: {
+            dribbble: (document.getElementById("pDribbble").value || "").trim(),
+            behance: (document.getElementById("pBehance").value || "").trim(),
+            external: (document.getElementById("pExternal").value || "").trim()
+          }
         };
         if (!newProject.images.length) newProject.images = ["https://picsum.photos/900/600?random=" + Math.floor(Math.random() * 1000)];
         state.projects.push(newProject);
@@ -1585,6 +1837,17 @@
         render();
         alert(t("project_added"));
       });
+
+      const h3List = document.createElement("h3");
+      h3List.textContent = t("project_list");
+
+      const projectList = document.createElement("div");
+      projectList.style.marginBottom = "10px";
+      projectList.style.fontSize = "0.85rem";
+      projectList.style.color = "var(--text-secondary)";
+      projectList.innerHTML = state.projects.map(p =>
+        "#" + p.id + " — " + p.title
+      ).join("<br>");
 
       const h3Delete = document.createElement("h3");
       h3Delete.textContent = t("delete_project");
@@ -1617,18 +1880,34 @@
       content.appendChild(h2);
       content.appendChild(h3Profile);
       content.appendChild(nameField);
+      content.appendChild(avatarField);
       content.appendChild(saveBtn);
       content.appendChild(document.createElement("hr")).style.cssText = "border:0;border-top:1px solid rgba(255,255,255,0.08);margin:18px 0;";
+
+      content.appendChild(h3Exp);
+      content.appendChild(expList);
+      content.appendChild(expRoleField);
+      content.appendChild(expCompanyField);
+      content.appendChild(expYearsField);
+      content.appendChild(expDescField);
+      content.appendChild(expAddBtn);
+      content.appendChild(document.createElement("hr")).style.cssText = "border:0;border-top:1px solid rgba(255,255,255,0.08);margin:18px 0;";
+
       content.appendChild(h3Add);
       content.appendChild(titleField);
       content.appendChild(catField);
       content.appendChild(typeField);
       content.appendChild(imgField);
       content.appendChild(urlField);
+      content.appendChild(dribbbleField);
+      content.appendChild(behanceField);
+      content.appendChild(externalField);
       content.appendChild(descField);
       content.appendChild(toolsField);
       content.appendChild(addBtn);
       content.appendChild(document.createElement("hr")).style.cssText = "border:0;border-top:1px solid rgba(255,255,255,0.08);margin:18px 0;";
+      content.appendChild(h3List);
+      content.appendChild(projectList);
       content.appendChild(h3Delete);
       content.appendChild(deleteField);
       content.appendChild(deleteBtn);
@@ -1693,3 +1972,4 @@
 
 </body>
 </html>
+
